@@ -22,5 +22,6 @@ jobs:
       - name: Deploy to EKS
         run: |
           aws eks update-kubeconfig --name eks-llm-cluster --region ap-south-1
+          sed -i "s|YOUR_ECR_URL|${{ secrets.ECR_URL }}|g" k8s/deployment.yaml
           kubectl apply -f k8s/deployment.yaml
           kubectl apply -f k8s/service.yaml
