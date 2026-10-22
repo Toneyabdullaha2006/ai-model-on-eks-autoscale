@@ -22,7 +22,7 @@ module "eks" {
   subnet_ids = module.vpc.private_subnets
   eks_managed_node_groups = {
     gpu = {
-      instance_types = ["g5.xlarge"]
+      instance_types = ["t3.micro"]
       min_size = 0
       max_size = 2
       desired_size = 1
