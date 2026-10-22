@@ -19,3 +19,8 @@ jobs:
         docker build -t eks-llm .
         docker tag eks-llm:latest ${{ secrets.ECR_URL }}/eks-llm:latest
         docker push ${{ secrets.ECR_URL }}/eks-llm:latest
+      - name: Deploy to EKS
+        run: |
+          aws eks update-kubeconfig --name eks-llm-cluster --region ap-south-1
+          kubectl apply -f k8s/deployment.yaml
+          kubectl apply -f k8s/service.yaml
